@@ -23,13 +23,23 @@ class TwentyQuestions
   end
 
   def wrong_answer(ans)
+    #To preserve the array rather than rewrite it, I just popped out the ans
+    prev_q, q, q_ans = ans.shift, ans.shift, ans.shift
     "Dang...can you tell me what the word was?"
     new_ans = gets.chomp
     new_final_q = ["Is it a #{new_ans}?", true, false]
     "Whats a good question to separate #{find_word(ans[1])} from #{new_ans}?"
     new_q = gets.chomp
+    prev_q << new_q << new_final_q << q
     "And what is the answer? (#{new_q}) for #{new_ans}?"
-    ans[0] = (ans == 1 ? [new_q, new_final_q, ans[0]] : [new_q, ans[0], new_final_q])
+    prev_q[1, 2] = [prev[2], prev[1]] if answer == 2
+    save_answer
+  end
+
+  def save_answer
+    File.open("questions_hash.txt", "w") do |f|
+      f.puts @questions.to_yaml
+    end
   end
 
   def q_sesh(prev_q, q)
