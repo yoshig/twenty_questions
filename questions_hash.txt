@@ -1,4 +1,13 @@
 ---
-- Is it a dog?
-- false
-- true
+- First Q
+- - Does it bark?
+  - - Is it alive?
+    - - Is it a dog?
+      - true
+      - false
+    - - Is it a table?
+      - true
+      - false
+  - - Is it a cat?
+    - true
+    - false
